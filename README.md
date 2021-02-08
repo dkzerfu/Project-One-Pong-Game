@@ -30,5 +30,6 @@ point and vice versa.
 * The players will see the score on their side of the screen
 * If the players have 5 points, the player wins
 * users be able to use the keys to move the block
+* use matimatical equation for collition detection
 
 
