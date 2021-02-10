@@ -1,7 +1,26 @@
 
+let container = document.querySelector('.container')
+let playButton = document.querySelector('.start')
+let easyButton = document.querySelector('.easy')
+let mediumButton = document.querySelector('.medium')
+let hardButton = document.querySelector('.hard')
+let levelContainer = document.querySelector('.level')
+let body = document.querySelector('body')
+console.log(show)
+
+easyButton.addEventListener('click', function(){
+    levelContainer.innerHTML = ''
+})
+playButton.addEventListener('click', function(){
+    container.innerHTML = ''
+    var gameInterval = setInterval(gameLoop, 1000 / 60)
+    reset()
+    render()
+    update()
+})
 let canvas = document.querySelector('.canvas')
-canvas.height = 400;
-canvas.width = 600;
+canvas.height = 500;
+canvas.width = 800;
 const c = canvas.getContext('2d')
 
 document.addEventListener('keydown', keyDownHandler);
@@ -18,7 +37,7 @@ let downArrowPressed = false;
 let aiUpArrowPressed = false;
 let aiDownArrowPressed = false;
 
-var gameInterval = setInterval(gameLoop, 1000 / 60)
+// var gameInterval = setInterval(gameLoop, 1000 / 60)
 
 const net = {
     x: canvas.width / 2 - netWidth / 2,
@@ -195,7 +214,7 @@ function keyUpHandler(event){
     }
 }
 function render(){
-    c.fillStyle = "green";
+    c.fillStyle = "black";
 
     c.fillRect(0,0, canvas.width, canvas.height)
 
