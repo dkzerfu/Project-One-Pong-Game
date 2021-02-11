@@ -34,6 +34,7 @@ document.addEventListener('keydown', keyDownHandler);
 document.addEventListener('keyup', keyUpHandler);
 
 var sound;
+var hitSound;
 var gameInterval;
 const netWidth = 4;
 const netHeight = canvas.height;
@@ -123,9 +124,11 @@ function drewScore(x, y, score){
 function gameLoop(){
 
     if(userDetectHit(ball, user)){
+        hit.play()
         ball.velocityX = -ball.velocityX
     }
     if(aiDetectHit(ball, ai)){
+        hit.play()
         ball.velocityX = -ball.velocityX
     }
 
@@ -156,6 +159,7 @@ function update(){
     }
     // if user or ai missed the ball, reset, increment the ball and compare win
     else if(ball.x + ball.radius >= canvas.width){
+        score.play()
         reset()
         user.score ++
         if(user.score === 5){
@@ -165,6 +169,7 @@ function update(){
     }
     if(ball.x - ball.radius < 0){
         //score incriment
+        score.play()
         ai.score ++
         reset()
         if(ai.score === 5){
@@ -246,7 +251,7 @@ function userDetectHit(obj1, obj2) {
         && obj1.x - obj1.radius + obj1.width > obj2.x
         && obj1.y - obj1.radius < obj2.y + obj2.height
         && obj1.y - obj1.radius + obj1.height > obj2.y) {
-        console.log('Hit detected')
+        
         return true
     }
 }
@@ -255,7 +260,7 @@ function aiDetectHit(obj1, obj2) {
         && obj1.x + obj1.radius + obj1.width > obj2.x
         && obj1.y + obj1.radius < obj2.y + obj2.height
         && obj1.y + obj1.radius + obj1.height > obj2.y) {
-       ball.sound
+
         return true
     }
 }
@@ -300,7 +305,7 @@ function playAgain(){
     container.innerText = ''
     container.classList.remove('hidden')
     restart.addEventListener('click', function(){
-        container.classList.add('hidden')
+        //container.classList.add('level')
         gameInterval = setInterval(gameLoop, 1000 / 60)
         user.score = 0;
         ai.score = 0;
@@ -309,17 +314,10 @@ function playAgain(){
     container.appendChild(restart)
 
 }
-function sound(src) {
-    this.sound = document.createElement("audio");
-    this.sound.src = "sound/Ping Pong Ball Hits-[AudioTrimmer.com].mp3";
-    this.sound.setAttribute("preload", "auto");
-    this.sound.setAttribute("controls", "none");
-    this.sound.style.display = "none";
-    document.body.appendChild(this.sound);
-    this.play = function(){
-      this.sound.play();
-    }
-    this.stop = function(){
-      this.sound.pause();
-    }
-  }
+var hit = document.querySelector('#hit');
+var score = document.querySelector('#score')
+console.log(score)
+function playAudio(){
+    hit.play()
+    score.play()
+}
