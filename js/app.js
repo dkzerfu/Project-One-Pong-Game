@@ -10,6 +10,18 @@ easyButton.addEventListener('click', function(){
     container.innerHTML = ''
     creatingPlayButton()
 })
+mediumButton.addEventListener('click', function(){
+    container.innerHTML = ''
+    ball.velocityX = 6;
+    ball.velocityY = 6;
+    creatingPlayButton()
+})
+hardButton.addEventListener('click', function(){
+    container.innerHTML = ''
+    ball.velocityX = 8;
+    ball.velocityY = 8;
+    creatingPlayButton()
+})
 
 
 let canvas = document.querySelector('.canvas')
@@ -73,7 +85,6 @@ const ball = {
     velocityX: 4,
     velocityY: 4,
     color: '#ff9933',
-    sound: "Ping Pong Ball Hits-[AudioTrimmer.com].mp3"
 }
 
 function drewNet(){
@@ -291,9 +302,24 @@ function playAgain(){
     restart.addEventListener('click', function(){
         container.classList.add('hidden')
         gameInterval = setInterval(gameLoop, 1000 / 60)
+        user.score = 0;
+        ai.score = 0;
         reset()
     })
     container.appendChild(restart)
 
 }
-playAgain()
+function sound(src) {
+    this.sound = document.createElement("audio");
+    this.sound.src = "sound/Ping Pong Ball Hits-[AudioTrimmer.com].mp3";
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+    this.play = function(){
+      this.sound.play();
+    }
+    this.stop = function(){
+      this.sound.pause();
+    }
+  }

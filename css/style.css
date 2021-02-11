@@ -1,15 +1,19 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Stalinist+One&display=swap');
 * {
     margin: 0;
     padding: 0;
     
 }
 body {
+    background-image: url("p");
     text-align: center;
     display: flex;
     justify-content: center; 
     margin-top: 100px;
     background: black;
+}
+h4{
+    color: white;
 }
 canvas{
     border: 5px solid white;
@@ -21,13 +25,14 @@ canvas{
     position: fixed;
     height: 500px;
     width: 800px;
-    background: url("/Users/dagmzerfu/code/w3/Project-One-Pong-Game/shutterstock_1690478521.jpg");
+    background-image: url("../image/shutterstock_1690478521.jpg");
     background-size: cover;
     border: 5px solid white;
     border-radius: 15px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    font-family: 'Stalinist One', cursive;
     
 }
 .hidden{
@@ -47,45 +52,76 @@ canvas{
     height: 8vh;
     width: 20vh;
     border-radius: 1vh;
-    background: rgba(250, 248, 248, 0.9);
-    color: black;
+    background:  rgba(236, 5, 5, 0.507);
+    color: white;
     font-size: x-large;
+    font-family: 'Stalinist One', cursive;
 }
 .restart{
     border: none;
     height: 8vh;
     width: 20vh;
     border-radius: 1vh;
-    background: rgba(250, 248, 248, 0.9);
-    color: black;
-    font-size: x-large;
-    margin-left: 350px;
+    background: rgba(184, 16, 16, 0.5);
+    color: white;
+    font-family: 'Stalinist One', cursive;
+    font-size: large;
+    margin-left: 300px;
 }
 .easy {
     border: none;
     height: 5vh;
-    width: 15vh;
+    width: 17vh;
     border-radius: 1vh;
-    background: rgba(250, 248, 248, 0.9);
-    color: black;
+    background: rgba(236, 5, 5, 0.507);
+    color: white;
+    font-family: 'Stalinist One', cursive;
     
 }
 .medium {
     border: none;
     height: 5vh;
-    width: 15vh;
+    width: 17vh;
     border-radius: 1vh;
-    background: rgba(250, 248, 248, 0.9);
-    color: black;
+    background: rgba(236, 5, 5, 0.507);
+    color: white;
+    font-family: 'Stalinist One', cursive;
     
 }
 .hard {
     border: none;
     height: 5vh;
-    width: 15vh;
+    width: 17vh;
     border-radius: 1vh;
-    background: rgba(250, 248, 248, 0.9);
-    color: black;
+    background:  rgba(236, 5, 5, 0.507);
+    color: white;
+    font-family: 'Stalinist One', cursive;
+}
+.easy:hover {
+    height: 8vh;
+    width: 20vh;
+    background-color: rgba(236, 5, 5, 0.753);
+    
+}
+.medium:hover {
+    height: 8vh;
+    width: 20vh;
+    background-color:  rgba(236, 5, 5, 0.753);
+}
+.hard:hover {
+    height: 8vh;
+    width: 20vh;
+    background-color:  rgba(236, 5, 5, 0.753);
+}
+.start:hover {
+    height: 10vh;
+    width: 25vh;
+    background-color:  rgba(236, 5, 5, 0.753);
+}
+.restart:hover {
+    height: 10vh;
+    width: 25vh;
+    background-color:  rgba(236, 5, 5, 0.753);
 }
 .instraction {
     position: relative;
