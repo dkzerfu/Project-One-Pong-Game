@@ -1,31 +1,28 @@
 
 let container = document.querySelector('.container')
-let playButton = document.querySelector('.start')
 let easyButton = document.querySelector('.easy')
 let mediumButton = document.querySelector('.medium')
 let hardButton = document.querySelector('.hard')
 let levelContainer = document.querySelector('.level')
 let body = document.querySelector('body')
 console.log(show)
-
 easyButton.addEventListener('click', function(){
-    levelContainer.innerHTML = ''
-})
-playButton.addEventListener('click', function(){
     container.innerHTML = ''
-    var gameInterval = setInterval(gameLoop, 1000 / 60)
-    reset()
-    render()
-    update()
+    creatingPlayButton()
 })
+
+
 let canvas = document.querySelector('.canvas')
 canvas.height = 500;
 canvas.width = 800;
 const c = canvas.getContext('2d')
+const image = document.querySelector('#source')
 
 document.addEventListener('keydown', keyDownHandler);
 document.addEventListener('keyup', keyUpHandler);
 
+var sound;
+var gameInterval;
 const netWidth = 4;
 const netHeight = canvas.height;
 
@@ -36,8 +33,6 @@ let upArrowPressed = false;
 let downArrowPressed = false;
 let aiUpArrowPressed = false;
 let aiDownArrowPressed = false;
-
-// var gameInterval = setInterval(gameLoop, 1000 / 60)
 
 const net = {
     x: canvas.width / 2 - netWidth / 2,
@@ -77,7 +72,8 @@ const ball = {
     speed: 7,
     velocityX: 4,
     velocityY: 4,
-    color: 'white'
+    color: '#ff9933',
+    sound: "Ping Pong Ball Hits-[AudioTrimmer.com].mp3"
 }
 
 function drewNet(){
@@ -91,7 +87,7 @@ function drewuserPaddle(){
 }
 
 function drawBall(x, y, radius, color){
-    c.fillStyle = color;
+    c.fillStyle = ball.color;
     c.beginPath();
     c.arc(x, y, radius, 0, Math.PI * 2, true);
     c.closePath();
@@ -153,7 +149,7 @@ function update(){
         user.score ++
         if(user.score === 5){
             clearInterval(gameInterval)
-            console.log('User win')
+            playAgain()
         }
     }
     if(ball.x - ball.radius < 0){
@@ -162,7 +158,7 @@ function update(){
         reset()
         if(ai.score === 5){
             clearInterval(gameInterval)
-            console.log('Ai win')
+            playAgain()
         }
             
     }
@@ -214,9 +210,11 @@ function keyUpHandler(event){
     }
 }
 function render(){
-    c.fillStyle = "black";
+    
+    //c.draw image
+    // c.fillStyle = "black";
 
-    c.fillRect(0,0, canvas.width, canvas.height)
+    c.drawImage(image,0, 0, canvas.width, canvas.height)
 
     drewNet()
 
@@ -246,7 +244,7 @@ function aiDetectHit(obj1, obj2) {
         && obj1.x + obj1.radius + obj1.width > obj2.x
         && obj1.y + obj1.radius < obj2.y + obj2.height
         && obj1.y + obj1.radius + obj1.height > obj2.y) {
-        console.log('Hit detected')
+       ball.sound
         return true
     }
 }
@@ -267,5 +265,35 @@ function reset() {
     ball.velocityX = -ball.velocityX;
     ball.velocityY = -ball.velocityY;
 }
+// creating the play button
+function creatingPlayButton (){
+    let div = document.createElement('div')
+    let button = document.createElement('button')
+    let instraction = document.createElement('h2')
+    instraction.classList = 'instraction'
+    instraction.innerText = 'PRESS PLAY TO BEGIN'
+    div.appendChild(instraction)
+    button.classList = 'start'
+    button.addEventListener('click', function(){
+        container.classList.add('hidden')
+        gameInterval = setInterval(gameLoop, 1000 / 60)
+    })
+    button.innerText = 'PLAY'
+    div.appendChild(button)
+    container.appendChild(div)
+}
+function playAgain(){
+    let restart = document.createElement('button')
+    restart.classList = 'restart'
+    restart.innerText = 'RESTART'
+    container.innerText = ''
+    container.classList.remove('hidden')
+    restart.addEventListener('click', function(){
+        container.classList.add('hidden')
+        gameInterval = setInterval(gameLoop, 1000 / 60)
+        reset()
+    })
+    container.appendChild(restart)
 
-
+}
+playAgain()

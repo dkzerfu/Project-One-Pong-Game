@@ -13,6 +13,7 @@ body {
 }
 canvas{
     border: 5px solid white;
+    border-radius: 15px;
     /* border */
     
 }
@@ -20,23 +21,28 @@ canvas{
     position: fixed;
     height: 500px;
     width: 800px;
-    /* background-position: center; */
-    /* background: white; */
-    /* background: url("/Users/dagmzerfu/code/w3/Project-One-Pong-Game/shutterstock_1690478521.jpg"); */
+    background: url("/Users/dagmzerfu/code/w3/Project-One-Pong-Game/shutterstock_1690478521.jpg");
     background-size: cover;
     border: 5px solid white;
+    border-radius: 15px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     
 }
+.hidden{
+    display: none;
+}
+
 .level {
+    height: 300px;
+    width: 700px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    margin-left: 50px; 
 }
 .start {
-    
     border: none;
     height: 8vh;
     width: 20vh;
@@ -44,6 +50,16 @@ canvas{
     background: rgba(250, 248, 248, 0.9);
     color: black;
     font-size: x-large;
+}
+.restart{
+    border: none;
+    height: 8vh;
+    width: 20vh;
+    border-radius: 1vh;
+    background: rgba(250, 248, 248, 0.9);
+    color: black;
+    font-size: x-large;
+    margin-left: 350px;
 }
 .easy {
     border: none;
@@ -70,4 +86,16 @@ canvas{
     border-radius: 1vh;
     background: rgba(250, 248, 248, 0.9);
     color: black;
+}
+.instraction {
+    position: relative;
+    margin-bottom: 100px;
+    color: white;
+}
+.selections {
+    position: relative;
+    color: white;
+}
+.intro{
+    color: white;
 }
