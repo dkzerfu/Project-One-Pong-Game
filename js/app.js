@@ -307,6 +307,7 @@ function playAgain(){
     restart.classList = 'restart'
     restart.innerText = 'RESTART'
     container.innerText = ''
+    container.classList.remove('hidden')
     restart.addEventListener('click', function(){
         container.classList.add('hidden')
         gameInterval = setInterval(gameLoop, 1000 / 60)
