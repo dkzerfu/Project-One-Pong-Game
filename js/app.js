@@ -324,4 +324,4 @@ function playAudio(){
     hit.play()
     score.play()
 }
-playAgain()
+
