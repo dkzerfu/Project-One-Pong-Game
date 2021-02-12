@@ -7,16 +7,19 @@ let levelContainer = document.querySelector('.level')
 let body = document.querySelector('body')
 console.log(show)
 easyButton.addEventListener('click', function(){
+    hit.play()
     container.innerHTML = ''
     creatingPlayButton()
 })
 mediumButton.addEventListener('click', function(){
+    hit.play()
     container.innerHTML = ''
     ball.velocityX = 6;
     ball.velocityY = 6;
     creatingPlayButton()
 })
 hardButton.addEventListener('click', function(){
+    hit.play()
     container.innerHTML = ''
     ball.velocityX = 8;
     ball.velocityY = 8;
@@ -291,6 +294,7 @@ function creatingPlayButton (){
     div.appendChild(instraction)
     button.classList = 'start'
     button.addEventListener('click', function(){
+        hit.play()
         container.classList.add('hidden')
         gameInterval = setInterval(gameLoop, 1000 / 60)
     })
@@ -303,9 +307,8 @@ function playAgain(){
     restart.classList = 'restart'
     restart.innerText = 'RESTART'
     container.innerText = ''
-    container.classList.remove('hidden')
     restart.addEventListener('click', function(){
-        //container.classList.add('level')
+        container.classList.add('hidden')
         gameInterval = setInterval(gameLoop, 1000 / 60)
         user.score = 0;
         ai.score = 0;
@@ -321,3 +324,4 @@ function playAudio(){
     hit.play()
     score.play()
 }
+playAgain()
