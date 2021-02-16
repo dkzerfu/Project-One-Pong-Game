@@ -5,7 +5,19 @@ let mediumButton = document.querySelector('.medium')
 let hardButton = document.querySelector('.hard')
 let levelContainer = document.querySelector('.level')
 let body = document.querySelector('body')
-console.log(show)
+var hit = document.querySelector('#hit');
+var score = document.querySelector('#score')
+const image = document.querySelector('#source')
+
+let canvas = document.querySelector('.canvas')
+canvas.height = 500;
+canvas.width = 800;
+const c = canvas.getContext('2d')
+
+
+document.addEventListener('keydown', keyDownHandler);
+document.addEventListener('keyup', keyUpHandler);
+// console.log(show)
 easyButton.addEventListener('click', function(){
     hit.play()
     container.innerHTML = ''
@@ -27,18 +39,11 @@ hardButton.addEventListener('click', function(){
 })
 
 
-let canvas = document.querySelector('.canvas')
-canvas.height = 500;
-canvas.width = 800;
-const c = canvas.getContext('2d')
-const image = document.querySelector('#source')
-
-document.addEventListener('keydown', keyDownHandler);
-document.addEventListener('keyup', keyUpHandler);
 
 var sound;
 var hitSound;
 var gameInterval;
+
 const netWidth = 4;
 const netHeight = canvas.height;
 
@@ -50,81 +55,62 @@ let downArrowPressed = false;
 let aiUpArrowPressed = false;
 let aiDownArrowPressed = false;
 
-const net = {
-    x: canvas.width / 2 - netWidth / 2,
-    y: 0,
-    width: netWidth,
-    height: netHeight,
-    color: "white"
-};
-
-// user paddle
-const user = {
-    x: 10,
-    y: canvas.height / 2 - paddleHeight / 2,
-    width: paddleWidth,
-    height: paddleHeight,
-    color: 'white',
-    score: 0
-};
-
-// ai Paddle
-const ai = {
-    x: canvas.width - (paddleWidth + 10),
-    y: canvas.height / 2 - paddleHeight / 2,
-    width: paddleWidth,
-    height: paddleHeight,
-    color: 'white',
-    score: 0
+//!RECTANGLE CLASS
+class Recangle {
+    constructor(x, y, height, width, color, score){
+        this.x = x;
+        this.y = y;
+        this.height = height;
+        this.width = width;
+        this.color = color;
+        this.score = '0'
+    }
+    render(){
+        c.fillStyle = this.color;
+        c.fillRect(this.x, this.y, this.width, this.height)
+    }
 }
-
-// ball drow
-const ball = {
-    x: canvas.width / 2,
-    y: canvas.height / 2,
-    width: 3.5,
-    height: 7,
-    radius: 8,
-    speed: 7,
-    velocityX: 4,
-    velocityY: 4,
-    color: '#ff9933',
+//!BALL CLASS
+class Ball {
+    constructor(x, y, radius, color){
+        this.x = x;
+        this.y = y;
+        this.radius = radius;
+        this.color = color;
+        this.height = 3.5;
+        this.width = 7;
+        this.velocityX = 4;
+        this.velocityY = 4;
+    }
+    render(){
+        c.fillStyle = this.color;
+        c.beginPath();
+        c.arc(this.x, this.y, this.radius, 0, Math.PI *2, true)
+        c.closePath();
+        c.fill();
+    }
 }
-
-function drewNet(){
-    c.fillStyle = net.color;
-    c.fillRect(net.x, net.y, net.width, net.height);
-}
-
-function drewuserPaddle(){
-    c.fillStyle = ai.color
-    c.fillRect(user.x, user.y, user.width, user.height)
-}
-
-function drawBall(x, y, radius, color){
-    c.fillStyle = ball.color;
-    c.beginPath();
-    c.arc(x, y, radius, 0, Math.PI * 2, true);
-    c.closePath();
-    c.fill();
-}
-
-function drewAiPaddle(){
-    c.fillStyle = user.color
-    c.fillRect(ai.x, ai.y, ai.width, ai.height)
-}
-
 function drewScore(x, y, score){
     c.fillStyle = 'white';
     c.font = '35px sans-serif';
     c.fillText(score, x, y);
 }
 
+//!CREATING OBJECTS
+net = new Recangle(canvas.width / 2 - netWidth / 2, 0, netHeight, netWidth, 'white')
+user = new Recangle(10, canvas.height / 2 - paddleHeight / 2, paddleHeight, paddleWidth, 'white')
+ai = new Recangle(canvas.width - (paddleWidth + 10), canvas.height / 2 - paddleHeight / 2, paddleHeight, paddleWidth, 'white')
+ball = new Ball(canvas.width / 2, canvas.height / 2, 8, 'white')
+
 // gameLoop function
 // inside gameLoop finction
 // update function
 // render function
 function gameLoop(){
+    c.clearRect(0, 0, canvas.width, canvas.height)
+    c.drawImage(image,0, 0, canvas.width, canvas.height)
+    drewScore(canvas.width / 4, canvas.height / 6, user.score)
+    drewScore(3 * canvas.width / 4, canvas.height / 6, ai.score)
 
     if(userDetectHit(ball, user)){
         hit.play()
@@ -134,9 +120,12 @@ function gameLoop(){
         hit.play()
         ball.velocityX = -ball.velocityX
     }
-
-    update();
-    render();
+    net.render();
+    user.render();
+    ai.render();
+    ball.render();
+    
+    update()
 }
 
 function update(){
@@ -220,33 +209,13 @@ function keyUpHandler(event){
     downArrowPressed = false;
     break;
     case 38:
-        console.log('true')
+        // console.log('true')
     aiUpArrowPressed = false;
     break;
     case 40:
     aiDownArrowPressed = false;
     break;
     }
-}
-function render(){
-    
-    //c.draw image
-    // c.fillStyle = "black";
-
-    c.drawImage(image,0, 0, canvas.width, canvas.height)
-
-    drewNet()
-
-    drewuserPaddle(user.x, user.y, user.width, user.height, user.color)
-
-    drewAiPaddle(ai.x, ai.y, ai.width, ai.height, ai.color)
-
-    drawBall(ball.x, ball.y, ball.radius, ball.color)
-    //c.fillRect(ball.x, ball.y, ball.width, ball.height)
-
-    drewScore(canvas.width / 4, canvas.height / 6, user.score)
-
-    drewScore(3 * canvas.width / 4, canvas.height / 6, ai.score)
 }
 
 function userDetectHit(obj1, obj2) {
@@ -318,9 +287,7 @@ function playAgain(){
     container.appendChild(restart)
 
 }
-var hit = document.querySelector('#hit');
-var score = document.querySelector('#score')
-console.log(score)
+// console.log(score)
 function playAudio(){
     hit.play()
     score.play()
