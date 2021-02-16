@@ -8,7 +8,7 @@
 * And our Ping Pong Ball.
 
 
-![GitHub Logo](pageone.jpeg)
+![GitHub Logo](image/pageone.jpeg)
 ## How to win or loose the game
 * When the user1 misses the ball which the user2 had hit, the user2 gains 1 
 point and vice versa. 
@@ -19,7 +19,7 @@ point and vice versa.
 * will be using up arrow key to go up and down arrow button to go down
 #####
 #####
-![GitHub Logo](page2.jpeg)
+![GitHub Logo](image/page2.jpeg)
 ## How to build it 
 1. We need to set up our html css and js files
 2. Create canvas on html
@@ -31,5 +31,13 @@ point and vice versa.
 * If the players have 5 points, the player wins
 * users be able to use the keys to move the block
 * use matimatical equation for collition detection
+# Stretch goals
+* Add sound effect
+* by using phisics, create an ai algorithem
 
+# Resorces 
+* https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial
+* https://www.w3schools.com/html/html5_canvas.asp
+* https://www.youtube.com/watch?v=EO6OkltgudE
+* https://diveinto.html5doctor.com/canvas.html
 
